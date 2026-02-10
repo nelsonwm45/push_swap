@@ -23,6 +23,20 @@ This project involves sorting data on a stack, with a limited set of instruction
         -   `rra`, `rrb`, `rrr`: Rotate down.
 -   **Algorithm**: This implementation uses **Radix Sort** (base 2) for efficient sorting of large datasets.
 
+### Radix Sort Explanation
+
+Radix Sort is a non-comparative sorting algorithm. It avoids comparison by creating and distributing elements into buckets according to their radix. For `push_swap`, we use a binary version (base 2) adapted for two stacks:
+
+1.  **Indexing**: First, numbers are simplified to their relative ranks (0 to N-1). This avoids dealing with large or negative integers.
+2.  **Bitwise Processing**: The algorithm processes the binary representation of these indices bit by bit, from the least significant bit (LSB) to the most significant bit (MSB).
+3.  **Distribution**:
+    -   For the current bit `i`, if the bit at position `i` is `0`, the number is pushed to stack `b` (`pb`).
+    -   If the bit is `1`, the number stays in stack `a` and is rotated (`ra`).
+4.  **Collection**: After processing all numbers for bit `i`, all elements from stack `b` are pushed back to stack `a` (`pa`).
+5.  **Repeat**: This process repeats for all bits. Since the input is simplified to indices, the number of bits needed is small (e.g., 100 numbers < 2⁷, so 7 bits max).
+
+This guarantees the stack is sorted after processing the most significant bit.
+
 ### Bonus Part
 
 -   **The Checker**: `checker` takes the stack as arguments and reads instructions from standard input. It executes them and displays `OK` if sorted, or `KO` otherwise.
